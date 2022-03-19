@@ -110,7 +110,7 @@ def tcpdump():
 
     embed = {
         "title": f"Attack detected on {hostname}",
-        "description": f"An attack has been detected on {hostname}. Traffic belongs to " + str(analysis['network_count']) + " networks and there are " + str(analysis["ip_count"]) + " unique IP addresses.",
+        "description": f"An attack has been detected on {hostname}. Traffic belongs to " + str(analysis['network_count']) + " networks and there are " + str(analysis["ip_count"]) + " unique IP addresses. We are attempting mitigations.",
         "color": "15548997",
 
         "fields": [
@@ -150,7 +150,7 @@ def tcpdump():
 def convert_size(size_bytes):
    if size_bytes == 0:
        return "0B"
-   size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+   size_name = ("B", "KB", "MB", "GB", "TB")
    i = int(math.floor(math.log(size_bytes, 1024)))
    p = math.pow(1024, i)
    s = round(size_bytes / p, 2)
