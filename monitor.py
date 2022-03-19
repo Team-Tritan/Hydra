@@ -5,19 +5,21 @@ import subprocess
 import threading
 import requests
 import math
+import sys
 
 from datetime import datetime
 
-
-webhook = "https://discord.com/api/webhooks/928027339395301376/3ru0TMDCoXdei0_0EL3hfjKY71ZkQwt_ndLWanSqtObehPgoo7I52TFqHpAIE9RIVv7o"
-
+webhook = sys.argv[1]
+hostname = sys.argv[2]
 
 async def monitor():
+    if webhook == None:
+        print("No webhook specified. Exiting.")
+        return
     while True:
         current_in = get_bandwidth()
         await send_stat(current_in)
-        print(current_in)
-
+        time.sleep(1)
 
 async def send_stat(value):
     # check if a tcpdump is active
@@ -42,8 +44,8 @@ def check_if_still_under_attack():
         if threading.active_count() > 1:
             return False
         embed = {
-            "title": "Attack ended on CA-1",
-            "description": "The attack on CA-1 has ended.",
+            "title": f"Attack ended on {hostname}",
+            "description": f"The attack on {hostname} has ended.",
             "color": "5763719"
         }
         data = {
@@ -107,8 +109,8 @@ def tcpdump():
         "https://api.courvix.com/attack/analyze", files={'capture': capture_file}).json()
 
     embed = {
-        "title": "Attack detected on CA-1",
-        "description": "An attack has been detected on CA-1. Traffic belongs to " + str(analysis['network_count']) + " networks and there are " + str(analysis["ip_count"]) + " unique IP addresses.",
+        "title": f"Attack detected on {hostname}",
+        "description": f"An attack has been detected on {hostname}. Traffic belongs to " + str(analysis['network_count']) + " networks and there are " + str(analysis["ip_count"]) + " unique IP addresses.",
         "color": "15548997",
 
         "fields": [
@@ -130,7 +132,7 @@ def tcpdump():
             },
             {
                 "name": "Bandwidth",
-                "value": f"{convert_size(get_bandwidth_bytes())} MBit/s"
+                "value": convert_size(get_bandwidth_bytes())
             }
         ]
     }
