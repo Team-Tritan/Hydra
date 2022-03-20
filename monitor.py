@@ -15,7 +15,12 @@ hostname = sys.argv[2]
 async def monitor():
     if webhook == None:
         print("No webhook specified. Exiting.")
+        print("Usage: monitor.py <webhook> <hostname>")
         return
+    if hostname == None:
+        print("No hostname specified. Exiting.")
+        print("Usage: monitor.py <webhook> <hostname>")
+        return    
     while True:
         current_in = get_bandwidth()
         await send_stat(current_in)
