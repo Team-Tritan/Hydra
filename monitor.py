@@ -138,6 +138,10 @@ def tcpdump():
             {
                 "name": "Bandwidth",
                 "value": convert_size(get_bandwidth_bytes())
+            },
+            {
+                "name": "CPU Usage",
+                "value": f"{psutil.cpu_percent(interval=None)}%"
             }
         ]
     }
