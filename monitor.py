@@ -9,8 +9,15 @@ import sys
 
 from datetime import datetime
 
-webhook = sys.argv[1]
-hostname = sys.argv[2]
+try:
+    webhook = sys.argv[1]
+except IndexError:
+    webhook = None
+
+try:
+    hostname = sys.argv[2]
+except IndexError:
+    hostname = None
 
 async def monitor():
     if webhook == None:
