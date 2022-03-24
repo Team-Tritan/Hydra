@@ -46,7 +46,7 @@ def check_if_still_under_attack():
     if current_bandwidth > 2000:
         return True
     else:
-        if threading.active_count() > 1:
+        if threading.active_count() > 0:
             return False
         embed = {
             "title": f"Attack ended on {hostname}",
