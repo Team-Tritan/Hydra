@@ -110,7 +110,7 @@ def tcpdump():
         if not check_if_still_under_attack():
             # stop tcpdump
             dump.kill()
-            return
+            break
         if dump.poll() is not None:
             print("TCPdump finished. Sending to Courvix for analysis.")
             break
