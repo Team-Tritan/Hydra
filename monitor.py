@@ -43,7 +43,6 @@ async def send_stat(value):
         threading.Thread(target=tcpdump).start()
         while True:
             if not check_if_still_under_attack():
-                print("DDoS attack ended.")
                 break
 
 
