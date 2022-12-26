@@ -55,9 +55,9 @@ def check_if_still_under_attack():
         if threading.active_count() > 0:
             return False
         embed = {
-            "title": f"Attack ended on {hostname}",
+            "title": f"Attack - {hostname}",
             "description": f"The attack on {hostname} has ended.",
-            "color": "5763719"
+            "color": "#7B4CB9"
         }
         data = {
             "embeds": [
@@ -120,7 +120,7 @@ def tcpdump():
         "https://api.courvix.com/attack/analyze", files={'capture': capture_file}).json()
 
     embed = {
-        "title": f"Attack detected on {hostname}",
+        "title": f"Attack Detected - {hostname}",
         "description": f"An attack has been detected on {hostname}. Traffic belongs to " + str(analysis['network_count']) + " networks and there are " + str(analysis["ip_count"]) + " unique IP addresses. We are attempting mitigations.",
         "color": "15548997",
 
